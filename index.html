@@ -1,0 +1,255 @@
+<html>
+
+<head>
+  <title>Foqus demo</title>
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/drag.css">
+</head>
+
+<body>
+
+
+
+
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Shop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button type="button" class="form-control mr-sm-2" style="padding: 5px;" title="FOQUS" data-toggle="modal"
+          data-target="#uploadModal">
+          <img src="./img/icon.png" height="25px" width="30px" />
+        </button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+      </form>
+    </div>
+  </nav>
+
+
+
+
+
+
+
+
+  <!-- upload Modal -->
+  <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"
+    data-backdrop="false" style="width: 50%;transform: translate(50%, 10%);">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Search similars by image</h5>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+          <div id="drop-region" style="width: 100%;">
+            <div class="drop-message">
+              Drag & Drop images or click to upload
+            </div>
+            <div id="image-preview"></div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <h5>Powered by Foqus</h5>
+          <!-- TODO: add foqus logo -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="modal fade" id="selectionModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+    aria-hidden="true" data-backdrop="false" style="width: 50%;transform: translate(50%, 10%);">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Select and search similars</h5>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm">
+
+                <img id="preview" hidden />
+                <canvas id="myCanvas" width="380" height="400" style="border:1px solid #d3d3d3;">
+                  Your browser does not support the HTML5 canvas tag.
+                </canvas>
+
+              </div>
+              <div class="col-sm">
+
+                <p>Our Intelligent model has detected these elements within your image, select the wanted item to find
+                  similar products to it.</p>
+                <div id="objectsContainer" class="card" style="width: 100%;">
+                  <ul class="list-group list-group-flush">
+                    <!-- tags goes here -->
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+            <div class="row"  style="overflow-y: scroll; max-height: 200px;">
+              <p>Similar products found on this website:</p>
+              <div id="rowsContainer" class="container">
+                <div id="similarsContainer" class="row">
+                  <!-- similars goes here -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <h5>Powered by Foqus</h5>
+          <!-- TODO: add foqus logo -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <img id="image" />
+
+
+  <!-- store products  -->
+  <div style="padding-top: 20px">
+
+  </div>
+  <div class="container">
+    <h3>Our products</h3>
+    <div class="row">
+      <div class="col-sm">
+        <img src="./img/products/basket (1).jpg" style="width: 150px; height: auto;" />
+      </div>
+      <div class="col-sm">
+        <img src="./img/products/basket (11).jpg" style="width: 150px; height: auto;" />
+      </div>
+      <div class="col-sm">
+        <img src="./img/products/bermuda (13).jpg" style="width: 150px; height: auto;" />
+      </div>
+      <div class="col-sm">
+        <img src="./img/products/bermuda (2).jpg" style="width: 150px; height: auto;" />
+      </div>
+      <div class="col-sm">
+        <img src="./img/products/maillot (17).jpg" style="width: 150px; height: auto;" />
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <img src="./img/products/bermuda (10).jpg" style="width: 150px; height: auto;" />
+        </div>
+        <div class="col-sm">
+          <img src="./img/products/maillot (17).jpg" style="width: 150px; height: auto;" />
+        </div>
+        <div class="col-sm">
+          <img src="./img/products/maillot (20).jpg" style="width: 150px; height: auto;" />
+        </div>
+        <div class="col-sm">
+          <img src="./img/products/maillot (25).jpg" style="width: 150px; height: auto;" />
+        </div>
+        <div class="col-sm">
+          <img src="./img/products/maillot (8).jpg" style="width: 150px; height: auto;" />
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <img src="./img/products/polo (12).jpg" style="width: 150px; height: auto;" />
+          </div>
+          <div class="col-sm">
+            <img src="./img/products/polo (23).jpg" style="width: 150px; height: auto;" />
+          </div>
+          <div class="col-sm">
+            <img src="./img/products/short (29).jpg" style="width: 150px; height: auto;" />
+          </div>
+          <div class="col-sm">
+            <img src="./img/products/sweat (4).jpg" style="width: 150px; height: auto;" />
+          </div>
+          <div class="col-sm">
+            <img src="./img/products/sweat (7).jpg" style="width: 150px; height: auto;" />
+          </div>
+        </div>
+      </div>
+
+
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+
+      <script type="text/javascript" src="./js/drag.js"></script>
+      <script src="./js/azure-storage-blob.js" charset="utf-8"></script>
+
+      <script type="text/javascript">
+        //--- azure upload function
+        const accountName = "trynfitstorage";
+        const sasString = "se=2200-05-18&sp=rwlac&sv=2018-03-28&ss=b&srt=sco&sig=fEUbXno2CidCEXpaaUzkJvXCgUe25TtxSQO6ulNKG1M%3D";
+        const containerName = "backup";
+        const containerURL = new azblob.ContainerURL(
+          `https://${accountName}.blob.core.windows.net/${containerName}/devBACKUP/workspace/test_images/similarities/test-demo-foqus-bing/?${sasString}`,
+          azblob.StorageURL.newPipeline(new azblob.AnonymousCredential));
+
+
+        const uploadFiles = async (file) => {
+          try {
+            const promises = [];
+            const blockBlobURL = azblob.BlockBlobURL.fromContainerURL(containerURL, file.name);
+            promises.push(azblob.uploadBrowserDataToBlockBlob(
+              azblob.Aborter.none, file, blockBlobURL));
+
+            await Promise.all(promises);
+            console.log("uploaded to azure.");
+            return `https://${accountName}.blob.core.windows.net/${containerName}/devBACKUP/workspace/test_images/similarities/test-demo-foqus-bing/${file.name}`
+          } catch (error) {
+            console.log(error.body.message);
+            return null;
+          }
+        }
+      </script>
+</body>
+
+</html>

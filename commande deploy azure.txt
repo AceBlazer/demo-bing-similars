@@ -1,0 +1,3 @@
+az webapp up --location westeurope --name demo-objectdetection-frontend --html
+
+https://demo-objectdetection-frontend.azurewebsites.net/

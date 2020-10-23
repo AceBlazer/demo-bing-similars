@@ -1,0 +1,1 @@
+https://demo-objectdetection-frontend.azurewebsites.net/
